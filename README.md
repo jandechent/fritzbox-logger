@@ -6,11 +6,24 @@ Tested with:
 * Comet DECT Heizkörperthermostat (4x)
 
 # How to use
-Execute fritzbox-logger/Logger.py to start logging. The thread generates one file per actor (LOG_*name*.txt)
+The following code from the main.py starts logging the temperature every 15 minutes and plots this over time:
+```
+# __main.py__
+from Plotter import Plotter
+from Logger import Logger
 
-Execute fritzbox-logger/Plotter.py to plot the temperature over time (LOG_*.txt). 
+f=Logger("fritz.box", "smarthome","smarthome",delayInSeconds=15*60)
+f.start();
 
-PS: When not supplying credentials or server, the script attempts to connect to the adress *fritz.box* with the username *smarthome* and password *smarthome*. 
+while f.isAlive():
+    p=Plotter(plotnow=True,timeWindowInH=8)
+```
+
+The components of the module are:
+* fritzbox-logger/Logger.py is responsible for logging. The thread generates one file per actor (LOG_*name*.txt)
+* fritzbox-logger/Plotter.py is responsible for plotting the temperature over time (LOG_*.txt). 
+
+PS: Ideally the user *smarthome* with password *smarthome* has only accessrights to the smart home parts of the fritzbox.  
 
 # Dependencies
 Please pip-install the module: https://github.com/DerMitch/fritzbox-smarthome
