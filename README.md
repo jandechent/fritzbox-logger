@@ -8,7 +8,6 @@ Tested with:
 # How to use
 The following code from the main.py starts logging the temperature every 15 minutes and plots this over time:
 ```
-# __main.py__
 from Plotter import Plotter
 from Logger import Logger
 
